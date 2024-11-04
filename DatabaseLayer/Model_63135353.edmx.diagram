@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="03e3bf1de54b463385ec622b629a3260" Name="Diagram1">
+        <EntityTypeShape EntityType="Project_63135353Model.JobCategoryTable" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63135353Model.JobNatureTable" Width="1.5" PointX="3.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63135353Model.JobStatusTable" Width="1.5" PointX="3.75" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63135353Model.UserTable" Width="1.5" PointX="1.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Project_63135353Model.UserTypeTable" Width="1.5" PointX="1.5" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="Project_63135353Model.FK_UserTable_UserTypeTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Project_63135353Model.JobRequirementDetailTable" Width="1.5" PointX="8.375" PointY="12.875" />
+        <EntityTypeShape EntityType="Project_63135353Model.JobRequirementTable" Width="1.5" PointX="6.125" PointY="8.125" />
+        <AssociationConnector Association="Project_63135353Model.FK_JobRequirementDetailTable_JobRequirementTable" />
+        <EntityTypeShape EntityType="Project_63135353Model.PostJobTable" Width="1.5" PointX="6" PointY="11.5" />
+        <AssociationConnector Association="Project_63135353Model.FK_PostJobTable_JobCategoryTable" />
+        <AssociationConnector Association="Project_63135353Model.FK_PostJobTable_JobNatureTable" />
+        <AssociationConnector Association="Project_63135353Model.FK_JobRequirementDetailTable_PostJobTable" />
+        <AssociationConnector Association="Project_63135353Model.FK_PostJobTable_JobStatusTable" />
+        <AssociationConnector Association="Project_63135353Model.FK_PostJobTable_UserTable" />
+        <EntityTypeShape EntityType="Project_63135353Model.CompanyTable" Width="1.5" PointX="3.75" PointY="9" />
+        <AssociationConnector Association="Project_63135353Model.FK_CompanyTable_UserTable" />
+        <AssociationConnector Association="Project_63135353Model.FK_PostJobTable_CompanyTable" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

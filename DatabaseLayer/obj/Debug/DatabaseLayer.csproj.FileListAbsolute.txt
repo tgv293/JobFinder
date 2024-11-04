@@ -1,0 +1,12 @@
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\bin\Debug\DatabaseLayer.dll.config
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\bin\Debug\DatabaseLayer.dll
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\bin\Debug\DatabaseLayer.pdb
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\bin\Debug\EntityFramework.dll
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\bin\Debug\EntityFramework.xml
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\obj\Debug\DatabaseLayer.csproj.CoreCompileInputs.cache
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\obj\Debug\DatabaseLayer.csproj.CopyComplete
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\obj\Debug\DatabaseLayer.dll
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\obj\Debug\DatabaseLayer.pdb
+D:\BTLT\GDWeb\Project_63135353\DatabaseLayer\obj\Debug\DatabaseLayer.csproj.AssemblyReference.cache

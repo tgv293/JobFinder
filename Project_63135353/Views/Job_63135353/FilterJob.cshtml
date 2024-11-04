@@ -1,0 +1,276 @@
+﻿@model Project_63135353.Models.FilterJobMV_63135353
+
+@{
+    ViewBag.Title = "Filter Job";
+}
+
+@using (Html.BeginForm("FilterJob", "Job_63135353", FormMethod.Post,
+                    new
+                    {
+                        @class = "form-contact",
+                        @novalidate = "novalidate",
+                        @id = "filterForm"
+                    }))
+{
+    <!-- Hero Area Start-->
+    <div class="slider-area ">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center" data-background="@Url.Content("~/Content/assets/img/hero/about.jpg")">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Get your job</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End -->
+
+    <!-- Job List Area Start -->
+    <div class="job-listing-area pt-120 pb-120">
+        <div class="container">
+            <div class="row">
+                <!-- Left content -->
+                <div class="col-xl-3 col-lg-3 col-md-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="small-section-tittle2 mb-45">
+                                <div class="ion">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         width="20px" height="12px">
+                                        <path fill-rule="evenodd" fill="rgb(27, 207, 107)"
+                                              d="M7.778,12.000 L12.222,12.000 L12.222,10.000 L7.778,10.000 L7.778,12.000 ZM-0.000,-0.000 L-0.000,2.000 L20.000,2.000 L20.000,-0.000 L-0.000,-0.000 ZM3.333,7.000 L16.667,7.000 L16.667,5.000 L3.333,5.000 L3.333,7.000 Z" />
+                                    </svg>
+                                </div>
+                                <h4>Bộ Lọc</h4>
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Job Category Listing start -->
+                    <div class="job-category-listing mb-50">
+                        <!-- single one -->
+                        <div class="single-listing">
+                            <div class="small-section-tittle2">
+                                <h4>Danh Mục Công Việc</h4>
+                            </div>
+                            <!-- Select job items start -->
+                            <div class="select-job-items2">
+                                @Html.DropDownList("JobCategoryID",
+                                null,
+                                "--Chọn Danh Mục--",
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control container"
+                                })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="single-listing mt-5">
+                            <div class="small-section-tittle2">
+                                <h4>Loại Hình Công Việc</h4>
+                            </div>
+                            <!-- Select job items start -->
+                            <div class="select-job-items2">
+                                @Html.DropDownList("JobNatureID",
+                                null,
+                                "--Chọn Loại Hình--",
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control container"
+                                })
+                            </div>
+                        </div>
+                        <!-- single two -->
+                        <br />
+                        <div class="single-listing mt-5">
+                            <div class="small-section-tittle2">
+                                <h4>Nơi Làm Việc</h4>
+                            </div>
+                            <!-- Select job items start -->
+                            <div class="select-job-items2">
+                                @Html.EditorFor(model => model.Location, new
+                                {
+                                    htmlAttributes = new
+                                    {
+                                        @class = "form-control single-input",
+                                        @type = "text",
+                                        @name = "job_nature",
+                                        @placeholder = "Nhập Nơi làm việc",
+                                        @onfocus = "this.placeholder = ''",
+                                        @onblur = "this.placeholder = 'Nhập Nơi làm việc'",
+                                        @required = "true"
+                                    }
+                                })
+                                @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+                            </div>
+                            <!--  Select job items End-->
+                        </div>
+
+                        <div class="single-listing mt-4">
+                            <!-- Range Slider Start -->
+                            <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
+                                <div class="widgets_inner">
+                                    <div class="small-section-tittle2">
+                                        <h4>Khoảng Lương</h4>
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        @Html.EditorFor(model => model.MinSalary, new
+                                        {
+                                           htmlAttributes = new
+                                           {
+                                               @class = "form-control single-input",
+                                               @type = "number",
+                                               @name = "MinSalary",
+                                               @id = "minsalary",
+                                               @placeholder = "Từ",
+                                               @onfocus = "this.placeholder = ''",
+                                               @onblur = "this.placeholder = 'Từ'",
+                                               @min = "0",  // Đặt giá trị tối thiểu là 0
+                                               @step = "1", // Đặt bước là 1 để không cho số thập phân
+                                               @pattern = "[0-9]*",
+                                           }
+                                        })
+                                        <span class="mx-2"> - </span>
+                                        @Html.EditorFor(model => model.MaxSalary, new
+                                        {
+                                           htmlAttributes = new
+                                           {
+                                               @class = "form-control single-input",
+                                               @type = "number",
+                                               @name = "MaxSalary",
+                                               @id = "maxsalary",
+                                               @placeholder = "Đến",
+                                               @onfocus = "this.placeholder = ''",
+                                               @onblur = "this.placeholder = 'Đến'",
+                                               @min = "0",  // Đặt giá trị tối thiểu là 0
+                                               @step = "1", // Đặt bước là 1 để không cho số thập phân
+                                               @pattern = "[0-9]*",
+                                           }
+                                        })
+                                    </div>
+                                    <span id="minmaxError" class="text-danger"></span>
+                                </div>
+                                <div class="widgets_inner mt-4">
+                                    <div class="range_item text-center">
+                                        <input type="submit" value="Tìm Kiếm" class="button boxed-btn" />
+                                    </div>
+                                </div>
+                            </aside>
+                        </div>
+                    </div>
+                    <!-- Job Category Listing End -->
+                </div>
+                <!-- Right content -->
+                <div class="col-xl-9 col-lg-9 col-md-8">
+                    <!-- Featured_job_start -->
+                    <section class="featured-job-area">
+                        <div class="container">
+                            <!-- Count of Job list Start -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="count-job mb-35">
+                                        <span>@Model.Result.Count() Kết Quả</span>
+                                        <!-- Select job items start -->
+                                        <!--  Select job items End-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Count of Job list End -->
+                            <!-- single-job-content -->
+                            @foreach (var item in Model.Result)
+                            {
+                                <div class="single-job-items mb-30">
+                                    <div class="job-items">
+                                        <div class="company-img">
+                                            <a href="#"><img src="~/Content/assets/img/icon/job-list1.png" alt=""></a>
+                                        </div>
+                                        <div class="job-tittle job-tittle2">
+                                            <a href="@Url.Content("~/Job_63135353/JobDetails/" + item.PostJobID + "")">
+                                                <h4>@item.JobTitle</h4>
+                                            </a>
+                                            <ul>
+                                                <li>@item.CompanyTable.CompanyName</li>
+                                                <li><i class="fas fa-map-marker-alt"></i>@item.Location</li>
+                                                <li class="salary">@FormatSalaryRange(item.MinSalary, item.MaxSalary)</li>
+                                                @functions {
+                                                    public string FormatSalaryRange(int minSalary, int maxSalary)
+                                                    {
+                                                        string[] suffixes = { "", "k", "tr", "tỷ" };
+                                                        int[] divisors = { 1, 1000, 1000000, 1000000000 };
+
+                                                        int minIndex = GetIndex(minSalary);
+                                                        int maxIndex = GetIndex(maxSalary);
+
+                                                        string formattedRange = $"{minSalary / divisors[minIndex]}{suffixes[minIndex]} - {maxSalary / divisors[maxIndex]}{suffixes[maxIndex]}";
+                                                        return formattedRange;
+                                                    }
+
+                                                    private int GetIndex(int value)
+                                                    {
+                                                        if (value < 1000) return 0;
+                                                        if (value < 1000000) return 1;
+                                                        if (value < 1000000000) return 2;
+                                                        return 3;
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="items-link items-link2 f-right">
+                                        <a>@item.JobNatureTable.JobNature</a>
+                                        <span>@FormatTimeAgo(item.PostDate)</span>
+                                        @functions {
+                                            public string FormatTimeAgo(DateTime postDate)
+                                            {
+                                                TimeSpan timeAgo = DateTime.Now - postDate;
+
+                                                if (timeAgo.TotalHours < 24)
+                                                {
+                                                    // Hiển thị "Hôm nay" nếu trong vòng 24 giờ
+                                                    return "Hôm nay";
+                                                }
+                                                else
+                                                {
+                                                    // Hiển thị theo ngày nếu quá 24 giờ
+                                                    return $"{(int)timeAgo.TotalDays} ngày trước";
+                                                }
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </section>
+                    <!-- Featured_job_end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Job List Area End -->
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // ... (các đoạn mã khác)
+        // Sự kiện onchange cho dropdown JobCategoryID
+        $("#JobCategoryID").change(function () {
+            if ($(this).val() === "") {
+                // Nếu chọn "--Chọn Danh Mục--", đặt giá trị về ban đầu
+                $(this).val("0");
+            }
+        });
+
+        // Sự kiện onchange cho dropdown JobNatureID
+        $("#JobNatureID").change(function () {
+            if ($(this).val() === "") {
+                // Nếu chọn "--Chọn Loại Hình--", đặt giá trị về ban đầu
+                $(this).val("0");
+            }
+        });
+    });
+</script>

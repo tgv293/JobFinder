@@ -1,0 +1,200 @@
+﻿@model PagedList.IPagedList<DatabaseLayer.PostJobTable>
+@using PagedList.Mvc;
+@using System.Globalization
+
+@{
+    ViewBag.Title = "All Company Pending Jobs";
+}
+
+<style>
+    .pagination-area {
+        margin-top: 20px;
+    }
+
+        .pagination-area ul.pagination {
+            list-style: none;
+            display: inline-flex;
+        }
+
+            .pagination-area ul.pagination li.page-item {
+                margin: 0 5px;
+            }
+
+                .pagination-area ul.pagination li.page-item a {
+                    padding: 8px 15px;
+                    background-color: #f2f2f2;
+                    border: 1px solid #ddd;
+                    color: #333;
+                    border-radius: 4px;
+                    text-decoration: none;
+                }
+
+                .pagination-area ul.pagination li.page-item.active a {
+                    background-color: #fb246a;
+                    color: white;
+                    border: 1px solid #4CAF50;
+                }
+
+                .pagination-area ul.pagination li.page-item a:hover {
+                    background-color: #ddd;
+                }
+
+                .pagination-area ul.pagination li.page-item.disabled a {
+                    pointer-events: none;
+                    cursor: not-allowed;
+                    background-color: #e0e0e0;
+                    border: 1px solid #ccc;
+                    color: #999;
+                }
+
+                .pagination-area ul.pagination li.page-item span.ti-angle-right {
+                    margin-top: 4px;
+                }
+</style>
+
+<p>Chờ duyệt: @Model.TotalItemCount</p>
+
+<h2>DS Bài Đăng Chờ Duyệt</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Công Việc
+        </th>
+        <th>
+            Lương
+        </th>
+        <th>
+            Nơi Làm Việc
+        </th>
+        <th>
+            Số Lượng
+        </th>
+        <th>
+            Ngày Đăng
+        </th>
+        <th>
+            Hạn Nộp
+        </th>
+        <th>
+            Url
+        </th>
+        <th>
+            Danh Mục
+        </th>
+        <th>
+            Loại Hình
+        </th>
+        <th>
+            Trạng Thái
+        </th>
+        <th>
+            Thao Tác
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.JobTitle)
+    </td>
+    <td class="salary">
+        @FormatSalaryRange(item.MinSalary, item.MaxSalary)
+    </td>
+    @functions {
+        public string FormatSalaryRange(int minSalary, int maxSalary)
+        {
+            string[] suffixes = { "", "k", "tr", "tỷ" };
+            int[] divisors = { 1, 1000, 1000000, 1000000000 };
+
+            int minIndex = GetIndex(minSalary);
+            int maxIndex = GetIndex(maxSalary);
+
+            string formattedRange = $"{minSalary / divisors[minIndex]}{suffixes[minIndex]} - {maxSalary / divisors[maxIndex]}{suffixes[maxIndex]}";
+            return formattedRange;
+        }
+
+        private int GetIndex(int value)
+        {
+            if (value < 1000) return 0;
+            if (value < 1000000) return 1;
+            if (value < 1000000000) return 2;
+            return 3;
+        }
+    }
+
+    <td>
+        @Html.DisplayFor(modelItem => item.Location)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vacancy)
+    </td>
+    <td>
+        @item.PostDate.ToString("dd MMMM, yyyy", new CultureInfo("vi-VN"))
+    </td>
+    <td>
+        @item.ApplicationLastDate.ToString("dd MMMM, yyyy", new CultureInfo("vi-VN"))
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.WebUrl)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.JobCategoryTable.JobCategory)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.JobNatureTable.JobNature)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.JobStatusTable.JobStatus)
+    </td>
+    <td>
+        @Html.ActionLink("Xem", "JobDetails", new { id = item.PostJobID }, new { @class = "genric-btn info circle", @style = "width:100%" })
+        @Html.ActionLink("Duyệt", "ApprovedPost", new { id = item.PostJobID }, new { @class = "genric-btn success circle", @style = "width:100%" })
+        @Html.ActionLink("Loại", "CanceledPost", new { id = item.PostJobID }, new { @class = "genric-btn danger circle", @style = "width:100%" })
+    </td>
+</tr>
+    }
+</table>
+<div class="pagination-area pb-115 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="single-wrap d-flex justify-content-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-start">
+                            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("AllCompanyPendingJobs", new { page = 1 })">
+                                    <span class="ti-angle-double-left"></span>
+                                </a>
+                            </li>
+                            <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("AllCompanyPendingJobs", new { page = Model.PageNumber - 1 })">
+                                    <span class="ti-angle-left"></span>
+                                </a>
+                            </li>
+
+                            @for (var pageNumber = Math.Max(1, Model.PageNumber - 1); pageNumber <= Math.Min(Model.PageNumber + 1, Model.PageCount); pageNumber++)
+                            {
+                                <li class="page-item @(pageNumber == Model.PageNumber ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("AllCompanyPendingJobs", new { page = pageNumber })">@pageNumber</a>
+                                </li>
+                            }
+
+                            <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("AllCompanyPendingJobs", new { page = Model.PageNumber + 1 })">
+                                    <span class="ti-angle-right"></span>
+                                </a>
+                            </li>
+                            <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                                <a class="page-link" href="@Url.Action("AllCompanyPendingJobs", new { page = Model.PageCount })">
+                                    <span class="ti-angle-double-right"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

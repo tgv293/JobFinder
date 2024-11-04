@@ -1,0 +1,274 @@
+﻿<!doctype html>
+<html class="no-js" lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Job Finder </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/assets/img/favicon.ico">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="~/Content/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/Content/assets/css/price_rangs.css">
+    <link rel="stylesheet" href="~/Content/assets/css/slicknav.css">
+    <link rel="stylesheet" href="~/Content/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/Content/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="~/Content/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/assets/css/slick.css">
+    <link rel="stylesheet" href="~/Content/assets/css/nice-select.css">
+    <link rel="stylesheet" href="~/Content/assets/css/style.css">
+</head>
+
+<body>
+    @{
+        int userTypeID = 0;
+        if (!string.IsNullOrEmpty(Convert.ToString(Session["UserTypeID"])))
+        {
+            int.TryParse(Convert.ToString(Session["UserTypeID"]), out userTypeID);
+        }
+    }
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="~/Content/assets/img/logo/logo.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-area header-transparrent">
+            <div class="headder-top header-sticky">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-3 col-md-2">
+                            <!-- Logo -->
+                            <div class="logo">
+                                <a href="@Url.Content("~/Home_63135353/Index")"><img src="~/Content/assets/img/logo/logo.png" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9">
+                            <div class="menu-wrapper">
+                                <!-- Main-menu -->
+                                <div class="main-menu">
+                                    <nav class="d-none d-lg-block">
+                                        <ul id="navigation">
+                                            <li><a href="@Url.Content("~/Home_63135353/Index")">Trang Chủ</a></li>
+                                            <li><a href="@Url.Content("~/Job_63135353/FilterJob")">Tìm Việc </a></li>
+                                            <li><a href="@Url.Content("~/Home_63135353/About")">Giới Thiệu</a></li>
+                                            @if (userTypeID == 1)
+                                            {
+                                                <li>
+                                                    <a href="#">Thiết Lập</a>
+                                                    <ul class="submenu">
+                                                        <li><a href="@Url.Content("~/JobCategoryTables_63135353/Index")">Danh Mục Công Việc</a></li>
+                                                        <li><a href="@Url.Content("~/JobNatureTables_63135353/Index")">Tính Chất Công Việc</a></li>
+                                                    </ul>
+                                                </li>
+
+                                                <li><a href="@Url.Content("~/User_63135353/AllUsers")">DS TK</a></li>
+                                            }
+
+                                            @if (userTypeID == 2 || userTypeID == 1)
+                                            {
+                                                <li>
+                                                    <a href="#">Tuyển Dụng</a>
+                                                    <ul class="submenu">
+                                                        @if (userTypeID == 2)
+                                                        {
+                                                            <li><a href="@Url.Content("~/Job_63135353/PostJob")">Đăng Tin Tuyển Dụng</a></li>
+                                                            <li><a href="@Url.Content("~/Job_63135353/CompanyJobList")">DS Bài Tuyển Dụng</a></li>
+                                                        }
+                                                        else if (userTypeID == 1)
+                                                        {
+                                                            <li>
+                                                                <a href="@Url.Content("~/Job_63135353/AllCompanyPendingJobs")">Chờ Duyệt</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <!-- Header-btn -->
+                                <div class="header-btn d-none f-right d-lg-block">
+                                    @if (userTypeID == 0)
+                                    {
+                                        <a href="@Url.Content("~/User_63135353/NewUser")" class="btn head-btn1">Đăng Ký</a>
+                                        <a href="@Url.Content("~/User_63135353/Login")" class="btn head-btn2">Đăng Nhập</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Content("~/User_63135353/Logout")" class="btn head-btn1">Đăng Xuất</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    <main class="container">
+        @RenderBody()
+    </main>
+    <footer>
+        <!-- Bắt đầu phần chân trang -->
+        <div class="footer-area footer-bg footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="single-footer-caption mb-30">
+                                <div class="footer-tittle">
+                                    <h4>Về chúng tôi</h4>
+                                    <div class="footer-pera">
+                                        <p>Chúng tôi là nền tảng Kết Nối Sự Nghiệp, mang đến cơ hội và giải pháp cho sự phát triển sự nghiệp của bạn. Với cam kết xây dựng Tương Lai, chúng tôi hỗ trợ bạn khám phá và ứng tuyển vào những công việc mơ ước, từng bước một.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Thông tin liên hệ</h4>
+                                <ul>
+                                    <li>
+                                        TP Nha Trang, Khánh Hòa, Việt Nam
+                                    </li>
+                                    <li><a href="#">Điện thoại: +84 773 753 848</a></li>
+                                    <li><a href="#">Email: tai.gv.63cntt@ntu.edu.vn</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Liên kết quan trọng</h4>
+                                <ul>
+                                    <li><a href="@Url.Content("~/Job_63135353/FilterJob")">Xem Dự án</a></li>
+                                    <li><a href="#">Liên hệ chúng tôi</a></li>
+                                    <li><a href="#">Phản hồi</a></li>
+                                    <li><a href="#">Bất động sản</a></li>
+                                    <li><a href="#">Hỗ trợ</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-5">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h4>Thông báo</h4>
+                                <div class="footer-pera footer-pera2">
+                                    <p>Mang đến những thông báo quan trọng và cập nhật mới nhất từ cộng đồng sự nghiệp. Chúng tôi tin rằng, như những mùa xuân bé nhỏ, những cơ hội mới sẽ xuất hiện từ từ, tươi tắn như thiên đàng.</p>
+                                </div>
+                                <!-- Form -->
+                                <div class="footer-form">
+                                    <div id="mc_embed_signup">
+                                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                              method="get" class="subscribe_form relative mail_part">
+                                            <input type="email" name="email" id="newsletter-form-email" placeholder="Địa chỉ Email"
+                                                   class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                                   onblur="this.placeholder = ' Địa chỉ Email '">
+                                            <div class="form-icon">
+                                                <button type="submit" name="submit" id="newsletter-submit"
+                                                        class="email_icon newsletter-submit button-contactForm">
+                                                    <img src="~/Content/assets/img/icon/form.png" alt="">
+                                                </button>
+                                            </div>
+                                            <div class="mt-10 info"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </footer>
+    <!-- footer-bottom area -->
+    <div class="footer-bottom-area footer-bg">
+        <div class="container">
+            <div class="footer-border">
+                <div class="row d-flex justify-content-between align-items-center">
+                    <div class="col-xl-10 col-lg-10 ">
+                        <div class="footer-copy-right">
+                            <p>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                Copyright &copy;
+                                <script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart" aria-hidden="true"></i> by <a href="#" target="_blank">Giáp Văn Tài</a>
+                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2">
+                        <div class="footer-social f-right">
+                            <div class="footer-social f-right">
+                                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+    </footer>
+
+    <!-- JS here -->
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="~/Content/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="~/Content/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="~/Content/assets/js/popper.min.js"></script>
+    <script src="~/Content/assets/js/bootstrap.min.js"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="~/Content/assets/js/jquery.slicknav.min.js"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="~/Content/assets/js/owl.carousel.min.js"></script>
+    <script src="~/Content/assets/js/slick.min.js"></script>
+    <script src="~/Content/assets/js/price_rangs.js"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="~/Content/assets/js/wow.min.js"></script>
+    <script src="~/Content/assets/js/animated.headline.js"></script>
+    <script src="~/Content/assets/js/jquery.magnific-popup.js"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="~/Content/assets/js/jquery.scrollUp.min.js"></script>
+    <script src="~/Content/assets/js/jquery.nice-select.min.js"></script>
+    <script src="~/Content/assets/js/jquery.sticky.js"></script>
+
+    <!-- contact js -->
+    <script src="~/Content/assets/js/contact.js"></script>
+    <script src="~/Content/assets/js/jquery.form.js"></script>
+    <script src="~/Content/assets/js/jquery.validate.min.js"></script>
+    <script src="~/Content/assets/js/mail-script.js"></script>
+    <script src="~/Content/assets/js/jquery.ajaxchimp.min.js"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="~/Content/assets/js/plugins.js"></script>
+    <script src="~/Content/assets/js/main.js"></script>
+</body>
+</html>

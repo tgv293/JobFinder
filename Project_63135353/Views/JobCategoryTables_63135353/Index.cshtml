@@ -1,0 +1,127 @@
+﻿@model PagedList.IPagedList<DatabaseLayer.JobCategoryTable>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Job Categories";
+}
+
+<style>
+    .pagination-area {
+        margin-top: 20px;
+    }
+
+        .pagination-area ul.pagination {
+            list-style: none;
+            display: inline-flex;
+        }
+
+            .pagination-area ul.pagination li.page-item {
+                margin: 0 5px;
+            }
+
+                .pagination-area ul.pagination li.page-item a {
+                    padding: 8px 15px;
+                    background-color: #f2f2f2;
+                    border: 1px solid #ddd;
+                    color: #333;
+                    border-radius: 4px;
+                    text-decoration: none;
+                }
+
+                .pagination-area ul.pagination li.page-item.active a {
+                    background-color: #fb246a;
+                    color: white;
+                    border: 1px solid #4CAF50;
+                }
+
+                .pagination-area ul.pagination li.page-item a:hover {
+                    background-color: #ddd;
+                }
+
+                .pagination-area ul.pagination li.page-item.disabled a {
+                    pointer-events: none;
+                    cursor: not-allowed;
+                    background-color: #e0e0e0;
+                    border: 1px solid #ccc;
+                    color: #999;
+                }
+
+                .pagination-area ul.pagination li.page-item span.ti-angle-right {
+                    margin-top: 4px;
+                }
+</style>
+
+<div class="section-top-border col-md-12">
+    <p>Tổng Danh mục: @ViewBag.TotalCategories</p>
+    <h3 class="mb-30">Tất Cả Danh Mục @Html.ActionLink("Thêm Mới", "Create", null, new { @class = "btn btn-default", @style = "float:right;" })</h3>
+
+    <div class="progress-table-wrap">
+        <div class="progress-table">
+
+            <div class="table-head">
+                <div class="serial">#</div>
+                <div class="country">Danh Mục</div>
+                <div class="country">Mô Tả</div>
+                <div class="country">Thao Tác</div>
+            </div>
+            @{
+                // Initialize a variable to keep track of the serial number
+                var serialNumber = Model.PageNumber > 1 ? (Model.PageNumber - 1) * Model.PageSize : 0;
+            }
+            @foreach (var item in Model)
+            {
+                <div class="table-row">
+                    <div class="serial">@(++serialNumber)</div>
+                    <div class="country"> @Html.DisplayFor(modelItem => item.JobCategory) </div>
+                    <div class="country"> @Html.DisplayFor(modelItem => item.Description) </div>
+                    <div class="country">
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.JobCategoryID }, new { @class = "genric-btn primary" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.JobCategoryID }, new { @class = "genric-btn danger" })
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="pagination-area pb-115 text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="single-wrap d-flex justify-content-center">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-start">
+                                <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = 1 })">
+                                        <span class="ti-angle-double-left"></span>
+                                    </a>
+                                </li>
+                                <li class="page-item @(Model.PageNumber == 1 ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">
+                                        <span class="ti-angle-left"></span>
+                                    </a>
+                                </li>
+
+                                @for (var pageNumber = Math.Max(1, Model.PageNumber - 1); pageNumber <= Math.Min(Model.PageNumber + 1, Model.PageCount); pageNumber++)
+                                {
+                                    <li class="page-item @(pageNumber == Model.PageNumber ? "active" : "")">
+                                        <a class="page-link" href="@Url.Action("Index", new { page = pageNumber })">@pageNumber</a>
+                                    </li>
+                                }
+
+                                <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">
+                                        <span class="ti-angle-right"></span>
+                                    </a>
+                                </li>
+                                <li class="page-item @(Model.PageNumber == Model.PageCount ? "disabled" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", new { page = Model.PageCount })">
+                                        <span class="ti-angle-double-right"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

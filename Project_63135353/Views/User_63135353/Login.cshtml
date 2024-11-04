@@ -1,0 +1,140 @@
+﻿@model Project_63135353.Models.UserLoginMV_63135353
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="job-category-listing col-md-5 mb-50">
+                <div class="col-md-12">
+                    <h2 class="contact-title" align="center">Đăng Nhập</h2>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div>
+                @using (Html.BeginForm("Login", "User_63135353", FormMethod.Post,
+                    new
+                    {
+                        @class = "form-contact",
+                        @novalidate = "novalidate"
+                    }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.UserName, new
+                                {
+                                    htmlAttributes = new
+                                       {
+                                           @class = "form-control valid",
+                                           @type = "text",
+                                           @name = "name",
+                                           @id = "name",
+                                           @placeholder = "Vui lòng nhập Tên đăng nhập",
+                                           @onfocus = "this.placeholder = ''",
+                                           @onblur = "this.placeholder = 'Vui lòng nhập Tên đăng nhập'",
+                                           @required = "true"
+                                       }
+                                })
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.Password, new
+                                {
+                                    htmlAttributes = new
+                                       {
+                                           @class = "form-control valid",
+                                           @type = "password",
+                                           @name = "password",
+                                           @id = "password",
+                                           @placeholder = "Vui lòng nhập Mật khẩu",
+                                           @onfocus = "this.placeholder = ''",
+                                           @onblur = "this.placeholder = 'Vui lòng nhập Mật khẩu'",
+                                           @required = "true"
+                                       }
+                                })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                <div id="validationMessage" class="text-danger" style="display:none;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="display: flex; flex-direction: column; align-items: center;">
+                        <input type="submit" value="Đăng Nhập" class="button button-contactForm boxed-btn" />
+                        <a href="@Url.Content("~/User_63135353/Forgot")" class="btn-link mt-2">Quên Mật khẩu?</a>
+                    </div>
+                }
+            </div>
+
+            <div class="col-md-6" style="padding: 60px 0px 0px 60px;">
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-home"></i></span>
+                    <div class="media-body">
+                        <h3>Việt Nam, tỉnh Khánh Hòa</h3>
+                        <p>TP. Nha Trang, 650000</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                    <div class="media-body">
+                        <h3>+84 773 753 848</h3>
+                        <p>T2-T6, 9:00 AM-6:00 PM</p>
+                    </div>
+                </div>
+                <div class="media contact-info">
+                    <span class="contact-info__icon"><i class="ti-email"></i></span>
+                    <div class="media-body">
+                        <h3>tai.gv.63cntt@ntu.edu.vn</h3>
+                        <p>Gửi cho chúng tôi câu hỏi của bạn bất cứ lúc nào!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault(); // Ngăn chặn form submit mặc định
+
+            // Lấy giá trị từ các trường nhập liệu
+            var username = $("#name").val();
+            var password = $("#password").val();
+
+            // Kiểm tra xem các trường nhập liệu có rỗng không
+            if (!username || !password) {
+                $("#validationMessage").text("Vui lòng điền đầy đủ thông tin đăng nhập.");
+                $("#validationMessage").show();
+            } else {
+                $("#validationMessage").hide();
+
+                // Thực hiện submit form bằng AJAX
+                $.ajax({
+                    url: $("form").attr("action"),
+                    method: "POST",
+                    data: $("form").serialize(),
+                    success: function (data) {
+                        // Xử lý kết quả từ server
+                        if (data.success) {
+                            // Nếu đăng nhập thành công, chuyển hướng đến trang đó
+                            window.location.href = data.redirectUrl;
+                        } else {
+                            // Nếu có lỗi, hiển thị lỗi trong $("#validationMessage")
+                            $("#validationMessage").text("Sai tên đăng nhập hoặc mật khẩu.");
+                            $("#validationMessage").show();
+                        }
+                    },
+                    error: function () {
+                        console.log("Error submitting form via AJAX.");
+                    }
+                });
+            }
+        });
+    });
+</script>

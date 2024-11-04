@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Project_63135353ModelStoreContainer" CdmEntityContainer="Project_63135353Entities">
+    <EntitySetMapping Name="JobCategoryTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.JobCategoryTable">
+        <MappingFragment StoreEntitySet="JobCategoryTable">
+          <ScalarProperty Name="JobCategoryID" ColumnName="JobCategoryID" />
+          <ScalarProperty Name="JobCategory" ColumnName="JobCategory" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobNatureTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.JobNatureTable">
+        <MappingFragment StoreEntitySet="JobNatureTable">
+          <ScalarProperty Name="JobNatureID" ColumnName="JobNatureID" />
+          <ScalarProperty Name="JobNature" ColumnName="JobNature" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobStatusTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.JobStatusTable">
+        <MappingFragment StoreEntitySet="JobStatusTable">
+          <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
+          <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
+          <ScalarProperty Name="StatusMessage" ColumnName="StatusMessage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.UserTable">
+        <MappingFragment StoreEntitySet="UserTable">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypeTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.UserTypeTable">
+        <MappingFragment StoreEntitySet="UserTypeTable">
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobRequirementDetailTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.JobRequirementDetailTable">
+        <MappingFragment StoreEntitySet="JobRequirementDetailTable">
+          <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
+          <ScalarProperty Name="JobRequirementDetail" ColumnName="JobRequirementDetail" />
+          <ScalarProperty Name="JobRequirementID" ColumnName="JobRequirementID" />
+          <ScalarProperty Name="JobRequirementDetailID" ColumnName="JobRequirementDetailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="JobRequirementTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.JobRequirementTable">
+        <MappingFragment StoreEntitySet="JobRequirementTable">
+          <ScalarProperty Name="JobRequirementTitle" ColumnName="JobRequirementTitle" />
+          <ScalarProperty Name="JobRequirementID" ColumnName="JobRequirementID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostJobTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.PostJobTable">
+        <MappingFragment StoreEntitySet="PostJobTable">
+          <ScalarProperty Name="WebUrl" ColumnName="WebUrl" />
+          <ScalarProperty Name="JobStatusID" ColumnName="JobStatusID" />
+          <ScalarProperty Name="ApplicationLastDate" ColumnName="ApplicationLastDate" />
+          <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+          <ScalarProperty Name="JobNatureID" ColumnName="JobNatureID" />
+          <ScalarProperty Name="Vacancy" ColumnName="Vacancy" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="MaxSalary" ColumnName="MaxSalary" />
+          <ScalarProperty Name="MinSalary" ColumnName="MinSalary" />
+          <ScalarProperty Name="JobDescription" ColumnName="JobDescription" />
+          <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+          <ScalarProperty Name="JobCategoryID" ColumnName="JobCategoryID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="PostJobID" ColumnName="PostJobID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CompanyTables">
+      <EntityTypeMapping TypeName="Project_63135353Model.CompanyTable">
+        <MappingFragment StoreEntitySet="CompanyTable">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+          <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

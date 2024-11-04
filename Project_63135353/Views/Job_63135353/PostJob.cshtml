@@ -1,0 +1,359 @@
+﻿@model Project_63135353.Models.PostJobMV_63135353
+
+@{
+    ViewBag.Title = "Post Job";
+}
+
+<style>
+    .custom-line-height {
+        line-height: 35px;
+    }
+
+    .full-width-dropdown {
+        width: 100%;
+    }
+</style>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="contact-title">Tin Tuyển Dụng</h2>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            </div>
+
+            @using (Html.BeginForm("PostJob", "Job_63135353", FormMethod.Post,
+            new
+            {
+                @class = "form-contact"
+            }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Nhập Tên Công Việc
+                                @Html.EditorFor(model => model.JobTitle, new
+                                {
+                                    htmlAttributes = new
+                                        {
+                                            @class = "form-control valid",
+                                            @type = "text",
+                                            @name = "jobtitle",
+                                            @id = "jobtitle",
+                                            @placeholder = "Vui lòng nhập Tên Công việc",
+                                            @onfocus = "this.placeholder = ''",
+                                            @onblur = "this.placeholder = 'Vui lòng nhập Tên Công việc'",
+                                        }
+                                })
+                                <span id="jobtitleError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Nhập Nơi Làm Việc
+                                @Html.EditorFor(model => model.Location, new
+                                {
+                                    htmlAttributes = new
+                                        {
+                                            @class = "form-control valid",
+                                            @type = "text",
+                                            @name = "location",
+                                            @id = "location",
+                                            @placeholder = "Vui lòng nhập Nơi làm việc",
+                                            @onfocus = "this.placeholder = ''",
+                                            @onblur = "this.placeholder = 'Vui lòng nhập Nơi làm việc'",
+                                        }
+                                })
+                                <span id="locationError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Nhập Mức Lương Thấp Nhất (VND)
+                                @Html.EditorFor(model => model.MinSalary, new
+                                {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control valid",
+                                       @type = "number",
+                                       @name = "minsalary",
+                                       @id = "minsalary",
+                                       @placeholder = "Vui lòng nhập Mức lương thấp nhất",
+                                       @onfocus = "this.placeholder = ''",
+                                       @onblur = "this.placeholder = 'Vui lòng nhập Mức lương thấp nhất'",
+                                   }
+                                })
+                                <span id="minsalaryError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Nhập Mức Lương Cao Nhất (VND)
+                                @Html.EditorFor(model => model.MaxSalary, new
+                                {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control valid",
+                                       @type = "number",
+                                       @name = "maxsalary",
+                                       @id = "maxsalary",
+                                       @placeholder = "Vui lòng nhập Mức lương cao nhất",
+                                       @onfocus = "this.placeholder = ''",
+                                       @onblur = "this.placeholder = 'Vui lòng nhập Mức lương cao nhất'",
+                                   }
+                                })
+                                <span id="maxsalaryError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Nhập Số Lượng Tuyển
+                                @Html.EditorFor(model => model.Vacancy, new
+                                {
+                                   htmlAttributes = new
+                                   {
+                                       @class = "form-control valid",
+                                       @type = "number",
+                                       @name = "vacancy",
+                                       @id = "vacancy",
+                                       @placeholder = "Vui lòng nhập Số lượng tuyển",
+                                       @onfocus = "this.placeholder = ''",
+                                       @onblur = "this.placeholder = 'Vui lòng nhập Số lượng tuyển'",
+                                   }
+                                })
+                                <span id="vacancyError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                Nhập Đường Dẫn Trang Tuyển Dụng
+                                @Html.EditorFor(model => model.WebUrl, new
+                                {
+                                    htmlAttributes = new
+                                        {
+                                            @class = "form-control valid",
+                                            @type = "text",
+                                            @name = "weburl",
+                                            @id = "weburl",
+                                            @placeholder = "Vui lòng nhập Đường dẫn",
+                                            @onfocus = "this.placeholder = ''",
+                                            @onblur = "this.placeholder = 'Vui lòng nhập Đường dẫn'",
+                                        }
+                                })
+                                <span id="weburlError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            Lựa Chọn Danh Mục Công Việc
+                            <div class="form-group">
+                                @Html.DropDownList("JobCategoryID",
+                                null,
+                                "--Chọn Danh Mục--",
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control custom-line-height full-width-dropdown"
+                                })
+                                <span id="JobCategoryIDError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            Lựa Chọn Loại Hình Công Việc
+                            <div class="form-group">
+                                @Html.DropDownList("JobNatureID",
+                                null,
+                                "--Chọn Loại Hình--",
+                                htmlAttributes: new
+                                {
+                                    @class = "form-control custom-line-height full-width-dropdown"
+                                })
+                                <span id="JobNatureIDError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 mt-3">
+                            <div class="form-group">
+                                Chọn Hạn Nộp Đơn
+                                @Html.TextBoxFor(model => model.ApplicationLastDate, "{0:yyyy-MM-dd}", new
+                                {
+                                    @class = "form-control valid",
+                                    type = "date",
+                                    name = "applicationlastdate",
+                                    id = "applicationlastdate",
+                                    placeholder = "Vui lòng nhập Hạn nộp",
+                                    onfocus = "this.placeholder = ''",
+                                    onblur = "this.placeholder = 'Vui lòng nhập Hạn nộp'",
+                                    min = DateTime.Now.ToString("yyyy-MM-dd") // Thêm thuộc tính min vào đây
+                                })
+                                <span id="applicationlastdateError" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                Nhập Mô Tả Công Việc
+                                @Html.EditorFor(model => model.JobDescription, new
+                                {
+                                    htmlAttributes = new
+                                        {
+                                            @class = "form-control",
+                                            @type = "text",
+                                            @name = "jobdescription",
+                                            @id = "jobdescription",
+                                            @placeholder = "Vui lòng nhập Mô tả",
+                                            @onfocus = "this.placeholder = ''",
+                                            @onblur = "this.placeholder = 'Vui lòng nhập Mô tả'",
+                                        }
+                                })
+                                <span id="jobdescriptionError" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <input type="submit" value="Đăng" class="button boxed-btn" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Thiết lập giá trị mặc định cho các trường
+        $("#minsalary").val(1000);
+        $("#maxsalary").val(1000);
+        $("#vacancy").val(1);
+
+        // Bắt sự kiện khi form submit
+        $("form").submit(function (e) {
+            e.preventDefault(); // Ngăn chặn form submit mặc định
+
+            // Lấy giá trị từ các trường nhập liệu
+            var formData = {
+                jobtitle: $("#jobtitle").val(),
+                location: $("#location").val(),
+                minsalary: $("#minsalary").val(),
+                maxsalary: $("#maxsalary").val(),
+                vacancy: $("#vacancy").val(),
+                weburl: $("#weburl").val(),
+                JobCategoryID: $("#JobCategoryID").val(),
+                JobNatureID: $("#JobNatureID").val(),
+                applicationlastdate: $("#applicationlastdate").val(),
+                jobdescription: $("#jobdescription").val()
+            };
+
+            // Kiểm tra và hiển thị lỗi cho mỗi trường
+            for (var key in formData) {
+                validateAndDisplayError(key, formData[key]);
+            }
+
+            // Nếu không có lỗi, thực hiện submit form bằng AJAX
+            if (!hasErrors()) {
+                submitForm();
+            }
+        });
+
+        // Hàm hiển thị thông báo lỗi của trường nào đó
+        function displayFieldError(fieldName, errorMessage) {
+            $("#" + fieldName).text(errorMessage);
+        }
+
+        // Hàm kiểm tra và hiển thị lỗi của một trường
+        function validateAndDisplayError(fieldName, value) {
+            var errorMessage = "";
+            if (!value.trim()) {
+                errorMessage = "Vui lòng nhập giá trị.";
+            } else {
+                switch (fieldName) {
+                    case "minsalary":
+                        if (parseInt(value) < 1000) {
+                            errorMessage = "Mức lương thấp nhất phải lớn hơn hoặc bằng 1000.";
+                        }
+                        break;
+                    case "maxsalary":
+                        var minSalary = parseInt($("#minsalary").val());
+                        if (parseInt(value) < 1000) {
+                            errorMessage = "Mức lương cao nhất phải lớn hơn hoặc bằng 1000.";
+                        } else if (!isNaN(minSalary) && parseFloat(value) < minSalary) {
+                            errorMessage = "Mức lương cao nhất phải lớn hơn hoặc bằng Mức lương thấp nhất.";
+                        }
+                        break;
+                    case "vacancy":
+                        if (parseInt(value) < 1) {
+                            errorMessage = "Số lượng tuyển phải lớn hơn hoặc bằng 1.";
+                        }
+                        break;
+                    case "weburl":
+                        // Kiểm tra định dạng URL
+                        var urlPattern = /^(http|https):\/\/[^ "]+$/;
+                        if (!urlPattern.test(value)) {
+                            errorMessage = "Định dạng URL không hợp lệ.";
+                        }
+                        break;
+                    case "jobtitle":
+                        // Kiểm tra độ dài của JobTitle
+                        if (value.length > 500) {
+                            errorMessage = "Tên Công Việc không được vượt quá 500 ký tự.";
+                        }
+                        break;
+                    case "jobdescription":
+                        // Kiểm tra độ dài của JobDescription
+                        if (value.length > 2000) {
+                            errorMessage = "Mô Tả Công Việc không được vượt quá 2000 ký tự.";
+                        }
+                        break;
+                    // Thêm các trường kiểm tra khác nếu cần
+                }
+            }
+            displayFieldError(fieldName + "Error", errorMessage);
+        }
+
+        // Hàm kiểm tra xem có lỗi nào đó không
+        function hasErrors() {
+            // Kiểm tra các trường có thông báo lỗi không
+            var errorFields = ["jobtitle", "location", "minsalary", "maxsalary", "vacancy", "weburl", "JobCategoryID", "JobNatureID", "applicationlastdate", "jobdescription"];
+            for (var i = 0; i < errorFields.length; i++) {
+                if ($("#" + errorFields[i] + "Error").text() !== "") {
+                    return true;
+                }
+            }
+            return false; // Trả về true nếu có ít nhất một lỗi
+        }
+
+        // Hàm thực hiện submit form bằng AJAX
+        function submitForm() {
+            var form = $("form");
+            $.ajax({
+                url: form.attr("action"),
+                method: "POST",
+                data: form.serialize(),
+                success: function (data) {
+                    // Xử lý kết quả từ server
+                    if (data.success) {
+                        // Nếu đăng ký thành công, chuyển hướng đến trang đăng nhập
+                        window.location.href = data.redirectUrl;
+                    } else {
+                        // Nếu có lỗi, hiển thị lỗi dưới các trường tương ứng
+                        for (var fieldName in data.errors) {
+                            displayFieldError(fieldName + "Error", data.errors[fieldName][0]);
+                        }
+                    }
+                },
+                error: function () {
+                    console.log("Error submitting form via AJAX.");
+                }
+            });
+        }
+    });
+</script>
